@@ -1,5 +1,6 @@
 package dam.a42346.coolweatherapp
 
+import android.annotation.SuppressLint
 import android.content.res.Configuration
 import android.os.Bundle
 import android.view.View
@@ -11,9 +12,15 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.google.gson.Gson
 import java.io.InputStreamReader
 import java.net.URL
+
+import android.Manifest
+import android.content.pm.PackageManager
+import android.location.Location
+import androidx.core.app.ActivityCompat
 
 //TODO change to false
 private val day: Boolean = true
@@ -21,7 +28,7 @@ private val day: Boolean = true
 private const val lisbon_latitude: Float = 38.076F
 private const val lisbon_longitude: Float = -9.12F
 
-//private lateinit var fusedLocationClient: FusedLocationProviderClient
+private lateinit var fusedLocationClient: FusedLocationProviderClient
 
 class MainActivity : AppCompatActivity() {
 
@@ -46,8 +53,6 @@ class MainActivity : AppCompatActivity() {
         val longitudeV : EditText = findViewById(R.id.longitudeValue)
         longitudeV.hint = lisbon_longitude.toString()
 
-        //get the device's latitude and longitude
-        val device_latitude =
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.container)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -55,8 +60,51 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        fetchWeatherData(lisbon_latitude, lisbon_longitude).start()
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+            ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // Request location permissions if they are not granted
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION), 0)
+        }
+        var lat = lisbon_latitude
+        var lon = lisbon_longitude
+        fusedLocationClient.lastLocation
+            .addOnSuccessListener { location: Location? ->
+                // Use the location object as you wish
+                println("GOT GPS!!!")
+                println("Latitude: ${location?.latitude}, Longitude: ${location?.longitude}")
+                lat = location?.latitude?.toFloat() ?: lisbon_latitude
+                lon = location?.longitude?.toFloat() ?: lisbon_longitude
+            }
+
+        fetchWeatherData(lat, lon).start()
+
     }
+
+    @SuppressLint("MissingPermission")
+    /*
+    fun getLastKnownLocation() {
+        println("getLastKnownLocation()")
+        fusedLocationClient.lastLocation
+            .addOnSuccessListener { location ->
+                println("Location: $location")
+                if (location != null) {
+                    // Use your location object here
+                    val gps_lat = location.latitude
+                    val gps_lon = location.longitude
+                    // Handle the latitude and longitude as needed
+                    println("GPS Latitude: $gps_lat")
+                    println("GPS Longitude: $gps_lon")
+
+                    fetchWeatherData(gps_lat.toFloat(), gps_lon.toFloat()).start()
+                }
+            }
+            .addOnCanceledListener {
+                println("Location request cancelled")
+            }
+    }
+
+     */
 
     private fun WeatherAPI_Call(lat: Float, long: Float): WeatherData {
         println("WeatherAPI_Call()")
@@ -123,7 +171,6 @@ class MainActivity : AppCompatActivity() {
             println("time: " + time.text)
             time.text = request.current_weather.time
 
-    // TODO ...
             val wImage = when (val wCode = getWeatherCodeMap()[request.current_weather.weathercode]) {
                 WMO_WeatherCode.CLEAR_SKY,
                 WMO_WeatherCode.MAINLY_CLEAR,
@@ -140,7 +187,6 @@ class MainActivity : AppCompatActivity() {
             val drawable = getDrawable(resID)
             println("drawable: $drawable")
             weatherImage.setImageDrawable(drawable);
-// TODO ...
         }
     }
 
