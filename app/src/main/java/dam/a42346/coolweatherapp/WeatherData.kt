@@ -4,7 +4,7 @@ data class WeatherData(
     var latitude: String,
     var longitude: String,
     var timezone: String,
-    var currentWeather: CurrentWeather,
+    var current_weather: CurrentWeather,
     var hourly: Hourly
 )
 

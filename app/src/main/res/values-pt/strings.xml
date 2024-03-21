@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Cool Weather App</string>
+    <string name="app_name">App Tempo Fixe</string>
+    <string name="weather_image">visual tempo</string>
+    <string name="default_val">sem valor</string>
+    <string name="pressure">Pressão Nível Mar</string>
+    <string name="dir">Direção Vento</string>
+    <string name="speed">Velocidade Vento</string>
+    <string name="temp">Temperatura</string>
+    <string name="time">Tempo</string>
+    <string name="upd">Atualizar</string>
 </resources>

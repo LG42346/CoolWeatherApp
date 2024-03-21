@@ -15,33 +15,28 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
-        <item name="background">@color/viewBG</item>
-        <item name="android:textColor">@color/WeatherLabel</item>
+        <!-- <item name="background">@color/viewBG</item> -->
+        <!-- <item name="android:textColor">@color/WeatherLabel</item> -->
         <item name="android:textSize">18sp</item>
         <item name="android:textStyle">bold</item>
-
     </style>
-
     <style name="Theme.Day" parent="Theme.CoolWeatherApp">
-        <item name="android:windowBackground">@drawable/sunny_bg</item>
+        <!--<item name="android:windowBackground">@drawable/sunny_bg</item>-->
+        <item name="android:windowBackground">@drawable/winxp</item>
     </style>
-
     <style name="Theme.Day.Land" parent="Theme.CoolWeatherApp">
-        <item name="android:windowBackground">@drawable/sunny_bg_land</item>
+        <!--<item name="android:windowBackground">@drawable/sunny_bg_land</item>-->
+        <item name="android:windowBackground">@drawable/winxp_land</item>
     </style>
-
     <style name="Theme.Night" parent="Theme.CoolWeatherApp">
-        <item name="android:windowBackground">@drawable/night_bg</item>
+        <!--<item name="android:windowBackground">@drawable/night_bg</item>-->
+        <item name="android:windowBackground">@drawable/winxp_night</item>
     </style>
-
     <style name="Theme.Night.Land" parent="Theme.CoolWeatherApp">
-        <item name="android:windowBackground">@drawable/night_bg_land</item>
+        <!--<item name="android:windowBackground">@drawable/night_bg_land</item>-->
+        <item name="android:windowBackground">@drawable/winxp_night_land</item>
     </style>
-
-
 
     <style name="Theme.CoolWeatherApp" parent="Base.Theme.CoolWeatherApp" />
 
-    <color name="purple_500">#9C27B0</color>
-    <color name="purple_700">#7B1FA2</color>
 </resources>

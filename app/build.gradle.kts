@@ -41,6 +41,7 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+    implementation(libs.play.services.location)
     //implementation(libs.gson)
     //implementation(libs.google.gson)
     testImplementation(libs.junit)

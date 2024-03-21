@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Cool Weather App</string>
+    <string name="weather_image">visual weather</string>
+    <string name="longitude" translatable="false">Longitude </string>
+    <string name="latitude" translatable="false">Latitude </string>
+    <string name="default_val">…</string>
+    <string name="pressure">Sea Level Pressure </string>
+    <string name="dir">Wind Direction </string>
+    <string name="speed">Wind Speed </string>
+    <string name="temp">Temperature </string>
+    <string name="time">Time </string>
+    <string name="upd">Update</string>
 </resources>
