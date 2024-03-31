@@ -30,11 +30,17 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    buildFeatures {
+        //viewBinding = true
+        dataBinding = true
+    }
 }
 
 dependencies {
 
     implementation("com.google.code.gson:gson:2.10.1")
+
+    //implementation("android.arch.lifecycle:extensions:1.1.1")
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
@@ -42,6 +48,8 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.play.services.location)
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
+    implementation(libs.androidx.databinding.runtime)
     //implementation(libs.gson)
     //implementation(libs.google.gson)
     testImplementation(libs.junit)
